@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+
+    <ImageButton
+        android:id="@+id/btnHistory"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:tint="@color/colorAccent"
+        android:backgroundTint="#FFFFFF"
+        android:layout_gravity="end"
+        android:src="@android:drawable/ic_search_category_default" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal|center">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvDiceArea"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginLeft="40dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+
+        <Spinner
+            android:id="@+id/noOfDice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btnRoll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Roll!"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+</LinearLayout>
+
+
