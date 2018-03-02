@@ -35,6 +35,10 @@ public class DiceRollHistory {
         mRollList.add(roll);
     }
 
+    public void deleteRollList() {
+        mRollList = null;
+    }
+
     public DiceRoll getRoll(UUID id) {
         for (DiceRoll roll : mRollList) {
             if (roll.getId().equals(id)) {

@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import meng.dice_game.model.DiceRollHistory;
 
@@ -18,6 +19,7 @@ public class RollHistoryActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ImageButton mBtnBack;
     private RollAdaptor mAdapter;
+    private ImageButton mBtnClear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,20 @@ public class RollHistoryActivity extends AppCompatActivity {
             }
         });
 
+        mBtnClear = findViewById(R.id.btnClear);
+        mBtnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDiceRollHistory.deleteRollList();
+                mRecyclerView.removeAllViews();
+                makeToast("History cleared!");
+            }
+        });
+
+    }
+
+    private void makeToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
 

@@ -18,9 +18,18 @@
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp"
         android:id="@+id/rVHistory"
         android:layout_gravity="center"/>
+
+    <ImageButton
+        android:id="@+id/btnClear"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:tint="@color/colorAccent"
+        android:backgroundTint="#FFFFFF"
+        android:layout_gravity="end"/>
 </LinearLayout>
