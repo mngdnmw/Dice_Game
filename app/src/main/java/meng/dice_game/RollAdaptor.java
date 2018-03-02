@@ -12,13 +12,10 @@ import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import meng.dice_game.model.DiceRoll;
 import meng.dice_game.model.DiceRollHistory;
-import meng.dice_game.model.DieItem;
 
 /**
  * Created by meng on 02/03/2018.
@@ -52,12 +49,23 @@ public class RollAdaptor extends RecyclerView.Adapter<RollAdaptor.ViewHolder> {
         String reportDate = df.format(roll.getDate());
 
         holder.mTxtVDate.setText(reportDate);
+        holder.mTxtVDate.setGravity(1);
 
         holder.mRVRolls.setHasFixedSize(true);
-        holder.mRVRolls.setLayoutManager(new GridLayoutManager(mContext, 2));
+
+        GridLayoutManager layoutManager;
+
+        if (mContext.getResources().getConfiguration().orientation == 1) {
+            layoutManager = new GridLayoutManager(mContext, 2);
+        } else {
+            layoutManager = new GridLayoutManager(mContext, 3);
+        }
+        holder.mRVRolls.setLayoutManager(layoutManager);
+        holder.mRVRolls.setForegroundGravity(1);
 
         DiceAdaptor diceAdapter = new DiceAdaptor(roll.getRollResults(), mContext);
         holder.mRVRolls.setAdapter(diceAdapter);
+
 
     }
 

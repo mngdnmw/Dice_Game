@@ -130,7 +130,7 @@ public class DiceHomeActivity extends AppCompatActivity {
                     for (int i = 0; i < mDieItemList.size(); i++) {
                         int roll = new Random().nextInt(6) + 1;
                         DieItem diceRoll = new DieItem();
-                        diceRoll.setValue(roll + 1);
+                        diceRoll.setValue(roll);
                         mDieItemList.set(i, diceRoll);
                         updateDiceGrid();
                     }

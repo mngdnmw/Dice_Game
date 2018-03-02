@@ -27,6 +27,7 @@ public class RollHistoryActivity extends AppCompatActivity {
 
         //Initialising the recycler view
         mRecyclerView = findViewById(R.id.rVHistory);
+        mRecyclerView.removeAllViews();
         //All items have the same size
         mRecyclerView.setHasFixedSize(true);
         //One column in the grid
