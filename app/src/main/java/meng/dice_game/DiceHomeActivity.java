@@ -1,5 +1,6 @@
 package meng.dice_game;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,7 +37,7 @@ public class DiceHomeActivity extends AppCompatActivity {
     //private ArrayList<DiceRoll> mDiceRolls;
     private DiceRollHistory mDiceRollHistory;
     private static final String STATE_ITEMS = "DICE_ITEMS";
-    private int mNumRolls = 0;
+    //private int mNumRolls = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +59,14 @@ public class DiceHomeActivity extends AppCompatActivity {
         mBtnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DiceHomeActivity.this, RollHistoryActivity.class);
-                startActivity(intent);
+                if (!mDiceRollHistory.getRollList().isEmpty()) {
+                    Intent intent = new Intent(DiceHomeActivity.this, RollHistoryActivity.class);
+                    startActivity(intent);
+                } else {
+                    makeToast("You cannot view your history when you haven't rolled!");
+                }
             }
         });
-        if (0 >= mNumRolls)
-            mBtnHistory.setEnabled(false);
 
 
         //Adding roll die/dice functionality
@@ -91,6 +95,10 @@ public class DiceHomeActivity extends AppCompatActivity {
         drawDice();
 
 
+    }
+
+    private void makeToast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     private void clickRoll() {

@@ -39,7 +39,7 @@ public class RollAdaptor extends RecyclerView.Adapter<RollAdaptor.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.individual_die, parent, false);
+                .inflate(R.layout.individual_roll, parent, false);
         return new ViewHolder(view);
     }
 
@@ -55,6 +55,7 @@ public class RollAdaptor extends RecyclerView.Adapter<RollAdaptor.ViewHolder> {
 
         holder.mRVRolls.setHasFixedSize(true);
         holder.mRVRolls.setLayoutManager(new GridLayoutManager(mContext, 2));
+
         DiceAdaptor diceAdapter = new DiceAdaptor(roll.getRollResults(), mContext);
         holder.mRVRolls.setAdapter(diceAdapter);
 
