@@ -2,6 +2,7 @@ package meng.dice_game;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 import meng.dice_game.model.DiceRoll;
@@ -30,7 +32,7 @@ public class DiceHomeActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private ArrayList<DieItem> mDieItemList;
-    private ArrayList<DiceRoll> mDiceRolls;
+    //private ArrayList<DiceRoll> mDiceRolls;
     private DiceRollHistory mDiceRollHistory;
     private static final String STATE_ITEMS = "DICE_ITEMS";
     private int mNumRolls = 0;
@@ -39,7 +41,7 @@ public class DiceHomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         mDieItemList = new ArrayList<>();
-        mDiceRolls = new ArrayList<>();
+        //mDiceRolls = new ArrayList<>();
         mDiceRollHistory = DiceRollHistory.get(this);
 
         super.onCreate(savedInstanceState);
@@ -62,6 +64,8 @@ public class DiceHomeActivity extends AppCompatActivity {
         if (0 >= mNumRolls)
             mBtnHistory.setEnabled(false);
 
+
+        //Adding roll die/dice functionality
         mBtnRoll = findViewById(R.id.btnRoll);
         mBtnRoll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,21 +104,25 @@ public class DiceHomeActivity extends AppCompatActivity {
         Runnable runnable = new Runnable() {
             Handler handler = new Handler();
             int count = 0;
+
             @Override
             public void run() {
 
-                if(count==6)
-                {
+                if (count == 6) {
                     mBtnRoll.setEnabled(true);
-                    addNewRollToHistory();
-
+                    //Add the new list of values to this roll
+                    DiceRoll roll = new DiceRoll();
+                    //Set the variables of the roll
+                    roll.setDate(new Date());
+                    roll.setRollResults(mDieItemList);
+                    //Add this roll to the history of rolls
+                    mDiceRollHistory.addRollList(roll);
                     return;
-                }
-                else {
+                } else {
                     for (int i = 0; i < mDieItemList.size(); i++) {
                         int roll = new Random().nextInt(6) + 1;
                         DieItem diceRoll = new DieItem();
-                        diceRoll.setValue(roll);
+                        diceRoll.setValue(roll + 1);
                         mDieItemList.set(i, diceRoll);
                         updateDiceGrid();
                     }
@@ -127,64 +135,14 @@ public class DiceHomeActivity extends AppCompatActivity {
         };
         runnable.run();
 
-
-    }
-
-    private void addNewRollToHistory(){
+        Vibrator vibrate = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
+        vibrate.vibrate(250);
 
     }
 
     private void updateDiceGrid() {
         mAdapter = new DiceAdaptor(mDieItemList, this);
         mRecyclerView.setAdapter(mAdapter);
-    }
-
-
-//    private void roll(int one, int two) {
-//        mNumRolls++;
-//
-//        DiceRoll result = new DiceRoll();
-//        result.setResult1(one);
-//        result.setResult2(two);
-//
-//        // Calculates the rolls
-//        int roll1 = result.getResult1();
-//        int roll2 = result.getResult2();
-//        int sum = roll1+roll2;
-//
-//        // Adds a TextView to the LinearLayout of the history
-//        TextView tView = new TextView(this);
-//        tView.setText("Roll " + numRolls + ": " + roll1 + " + " + roll2 + " Sum: " + sum);
-//        listHistory.addView(tView);
-//
-//        // Vibrates the device
-//        Vibrator vibrate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-//        vibrate.vibrate(250);
-//    }
-
-    private void setDice(int number, ImageView imageView) {
-        switch (number) {
-            case 1:
-                imageView.setImageResource(R.drawable.d1);
-                break;
-            case 2:
-                imageView.setImageResource(R.drawable.d2);
-                break;
-            case 3:
-                imageView.setImageResource(R.drawable.d3);
-                break;
-            case 4:
-                imageView.setImageResource(R.drawable.d4);
-                break;
-            case 5:
-                imageView.setImageResource(R.drawable.d5);
-                break;
-            case 6:
-                imageView.setImageResource(R.drawable.d6);
-                break;
-            default:
-                break;
-        }
     }
 
     @Override

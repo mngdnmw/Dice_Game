@@ -9,7 +9,16 @@ import java.util.UUID;
  */
 public class DiceRoll {
     private UUID mId;
-    private List<Integer> mRollResults;
+    private List<DieItem> mRollResults;
+
+    public Date getDate() {
+        return mDate;
+    }
+
+    public void setDate(Date date) {
+        mDate = date;
+    }
+
     private Date mDate;
 
 
@@ -21,11 +30,11 @@ public class DiceRoll {
         return mId;
     }
 
-    public List<Integer> getRollResults() {
+    public List<DieItem> getRollResults() {
         return mRollResults;
     }
 
-    public void setRollResults(List<Integer> rollResults) {
+    public void setRollResults(List<DieItem> rollResults) {
         mRollResults = rollResults;
     }
 

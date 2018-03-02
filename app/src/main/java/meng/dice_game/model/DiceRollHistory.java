@@ -2,6 +2,7 @@ package meng.dice_game.model;
 
 import android.content.Context;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -24,15 +25,14 @@ public class DiceRollHistory {
 
     private DiceRollHistory(Context context) {
         mRollList = new ArrayList<>();
-
     }
 
     public List<DiceRoll> getRollList() {
         return mRollList;
     }
 
-    public void setRollList(List<DiceRoll> rollList) {
-        mRollList = rollList;
+    public void addRollList(DiceRoll roll) {
+        mRollList.add(roll);
     }
 
     public DiceRoll getRoll(UUID id) {
