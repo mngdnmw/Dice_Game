@@ -85,7 +85,7 @@ public class DiceHomeActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.rvDiceArea);
         //All items have the same size
         mRecyclerView.setHasFixedSize(true);
-        //One columns in the grid
+        //Three columns in the grid
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
 
         drawDice();
